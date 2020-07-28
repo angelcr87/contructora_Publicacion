@@ -1,0 +1,407 @@
+﻿@model IEnumerable<DINTRANET.Models.postBlog>
+
+@{
+    ViewBag.Title = "comunidadDIN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var usr = (DINTRANET.Models.usuarios)Session["usuario"];
+}
+
+@*<div class="jquery-script-ads">
+    <script type="text/javascript">
+<!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+    <script type="text/javascript"
+            src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+</div>*@
+
+    <!-- ============================================
+               =================== Breadcrumbs =================
+               ============================================= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+
+        <div class="container clearfix">
+            <h1>Blog de la Comunidad DIN</h1>
+
+        </div>
+
+    </section><!-- #breadcrumbs end -->
+
+
+
+
+    @*//var usr = (DINTRANET.Models.usuarios)Session["usuario"];*@
+    
+        
+        <div class="row">
+
+            <div class="comunidadBotones col-lg-4 col-md-4 col-sm-4">
+                @if (Session["usuario"] != null)
+                {
+                    if (usr.rolId == 1)
+                    {
+                        @*<center>*@
+                        <div style="text-align:center; margin-top:50px;">
+                            <button type="submit" id="btnPublicar" class="myBtn myBtn-rounded myBtn-3d m-0 mt-10">Realizar Publicacion</button>
+                        </div>
+                        @*</center>*@
+                    }
+                }
+
+            </div>
+            @*<hr style="border-left: 1px solid hsla(200, 10%, 50%,100); border:none; height: 100vh; width:1px;" />*@
+
+
+            <div class="comunidadBotones col-lg-4 col-md-4 col-sm-4">
+                <div style="text-align:center;">
+                    <h4 class="widget-heading">Filtrar</h4>
+
+                    @using (Html.BeginForm("index", "comunidadDIN", FormMethod.Post, new { id = "form" }))
+                    {
+
+                        <p>
+
+
+                            @Html.DropDownList("Categoria", null, "-- Selecciona Categoria para Filtrar --", htmlAttributes: new { @class = "js-example-basic-multiple", @Style = "width:90%;" })
+
+                        </p>
+                        <p>
+
+                            @Html.DropDownList("Anio", null, "-- Selecciona Año para Filtrar --", htmlAttributes: new { @class = "js-example-basic-multiple", @Style = "width:90%;" })
+
+
+                        </p>
+                            <p>
+                                <button type="submit" id="Filtrar" class="myBtn myBtn-rounded myBtn-3d m-0 mt-10">Filtrar</button>
+                            </p>
+
+
+                    }
+
+                    
+                </div>
+             </div>
+
+
+            <div class="comunidadBotones col-lg-4 col-md-4 col-sm-4">
+                <div style="text-align:center;">
+                    <!-- CATEGORIES -->
+                    @if (Session["usuario"] != null)
+                    {
+                        <h4 class="widget-heading">Categorias</h4>
+                    }
+
+
+                    <ul class="nav categories sidebar-widget">
+
+                        @if (Session["usuario"] != null)
+                        {
+
+                            if (usr.rolId == 1)
+                            {
+
+                                <li><a href="#" data-toggle="modal" data-target="#modalCategoriaCreate"><i class="fa fa-angle-right mr-5"></i>Crear Categoria </a></li>
+                                <li><a href="#" onclick="location.href='@Url.Action("Index","categoriasBlogs")'"><i class="fa fa-angle-right mr-5"></i>Administrar Categorias </a></li>
+                            }
+
+
+
+                        }
+
+
+                    </ul>
+                    <!-- END CATEGORIES -->
+                    </div>
+                </div>
+
+        </div>
+
+        <hr class="post-divider">
+        <div id="divPublicador" class="contenedor_forms" style="display:none;">
+
+            @*<h3 class="mt-40"><span class="text-theme">Comentamos</span> lo que piensas:</h3>*@
+            <h3 class="mt-40"><span class="text-theme">Comentale</span> a DIN:</h3>
+
+
+            @*<form>*@
+            @using (Html.BeginForm("create", "comunidadDIN", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                @Html.AntiForgeryToken()
+                <div class="row">
+
+                    <div class="form-group col-sm-4">
+                        <label for="titulo">Titulo <span class="text-lightred" style="font-size: 15px">*</span></label>
+                        <input name="titulo" type="text" class="form-control myInput" id="titulo" required>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="categoriaId">Categoria</label>
+                        @*<input name="email" type="email" class="form-control myInput" id="email">*@
+                        @Html.DropDownList("categoriaId", null, htmlAttributes: new { @class = "form-control myInput" })
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="imagen">Imagen</label>
+                        @*<input name="web" type="text" class="form-control myInput" id="web">*@
+                        <input type="file" id="imagen" name="imagen" class="form-control myInput" required />
+                    </div>
+
+                </div>
+
+
+
+                        <div class="row">
+
+                            <div class="form-group col-sm-12">
+                                <label for="contenido">Comentarios <span class="text-lightred" style="font-size: 15px">*</span></label>
+                                <textarea name="contenido" class="form-control myInput" id="contenido" rows="8" required></textarea>
+                            </div>
+
+                        </div>
+                        @*<input type="submit" value="Create" class="btn btn-default" />*@
+                        <button type="submit" id="comentar" class="myBtn myBtn-rounded myBtn-3d m-0 mt-10">Publicar</button>
+
+            }
+            @*</form>*@
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $("#btnPublicar").click(function () {
+
+                    $("#divPublicador").toggle(500);
+                });
+
+            });
+
+        </script>
+    
+
+
+
+
+
+    <section id="content -fluid">
+        <div class="content-wrap">
+            <div class="container clearfix">
+                <div class="row">
+
+                    <!-- BLOG POSTS -->
+                    <div class="col-sm-12 blog-posts">
+                        @if (Model.Count() == 0)
+                        {
+                            <h2> NO SE ENCONTRARON REGISTROS  </h2>
+                        }
+
+
+                        @foreach (var item in Model.OrderByDescending(i => i.fecha_Creacion))
+                        {
+
+                            <article class="post-entry">
+                                <div class="entry-title">
+                                    <h2 class="text-uppercase"><a href="~/comunidadDIN/comentarios/@item.postId">@item.titulo</a></h2>
+                                    
+                                    <center>
+                                        <ul class="entry-meta clearfix">
+                                            <li><i class="fa fa-calendar-o"></i> @String.Format("{0:dd/MMM/yyyy}", item.fecha_Creacion)
+                                            <li>
+                                            <li><i class="fa fa-comments"></i>@item.comentariosBlog.Count</li>
+                                        </ul>
+                                    </center>
+                                    <br />
+                                </div>
+                                <div class="entry-image">
+                                    <img src="@Url.Content(item.imagen)" class="img-responsive" alt="Image" style="image-orientation:from-image; margin:auto;">
+                                </div>
+
+                                
+
+                                
+
+                                <div class="entry-content">
+                                    <p> @item.contenido </p>
+                                </div>
+
+                                <a href="~/comunidadDIN/comentarios/@item.postId" class="myBtn myBtn-rounded myBtn-border myBtn-xs myBtn-midlight m-0 mt-20"><i class="fa fa-angle-right"></i> Ver Comentarios</a>
+                                @if (Session["usuario"] != null)
+                                {
+                                    //var usr = (DINTRANET.Models.usuarios)Session["usuario"];
+                                    if (usr.rolId == 1)
+                                    {
+                                        <a href="@Url.Content(String.Format("~/ComunidadDIN/edit/{0}", item.postId))" class="myBtn myBtn-rounded myBtn-border myBtn-xs myBtn-midlight m-0 mt-20"><i class="fa fa-angle-right"></i> Editar Publicacion</a>
+                                    }
+                                }
+
+                            </article>
+
+                            <hr class="post-divider">
+
+                        }
+
+
+
+
+                      
+
+                    </div>
+                    <!-- END BLOG POSTS -->
+                    <!-- BLOG SIDEBAR -->
+
+                    @*<div class="col-sm-4 sidebar">
+
+
+
+                        <!-- CATEGORIES -->
+                        @if (Session["usuario"] != null)
+                        {
+                            <h4 class="widget-heading">Categorias</h4>
+                        }
+
+                        
+                        <ul class="nav categories sidebar-widget">
+
+                            @if (Session["usuario"] != null)
+                            {
+                                
+                                if (usr.rolId == 1)
+                                {
+                                    
+                                    <li><a href="#" data-toggle="modal" data-target="#modalCategoriaCreate"><i class="fa fa-angle-right mr-5"></i>Crear Categoria </a></li>
+                                    <li><a href="#" onclick="location.href='@Url.Action("Index","categoriasBlogs")'"><i class="fa fa-angle-right mr-5"></i>Administrar Categorias </a></li>
+                                }
+
+
+
+                            }
+
+                          
+                        </ul>
+                        <!-- END CATEGORIES -->
+
+                        <hr style="color: #0056b2;" />
+                        <h4 class="widget-heading">Filtrar</h4>
+
+                        @using (Html.BeginForm("index", "comunidadDIN", FormMethod.Post, new { id = "form" }))
+                        {
+
+                            <p>
+
+
+                                @Html.DropDownList("Categoria", null, "-- Selecciona Categoria para Filtrar --", htmlAttributes: new { @class = "js-example-basic-multiple", @Style = "width:90%;" })
+
+                            </p>
+                                        <p>
+
+                                            @Html.DropDownList("Anio", null, "-- Selecciona Año para Filtrar --", htmlAttributes: new { @class = "js-example-basic-multiple", @Style = "width:90%;" })
+
+                                           
+                                        </p>
+                                        <p>
+                                            <button type="submit" id="Filtrar" class="myBtn myBtn-rounded myBtn-3d m-0 mt-10">Filtrar</button>
+                                        </p>
+
+
+                        }
+
+
+
+
+
+
+
+                    </div>*@
+
+
+                    <!-- END BLOG SIDEBAR -->
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalCategoriaCreate" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        @*<h4 class="modal-title">Crear Categoria</h4>*@
+                        <label for="nombre">CREAR CATEGORIA <span class="text-lightred" style="font-size: 3px">*</span></label>
+                    </div>
+                    <br />
+
+
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Create2", "categoriasBlogs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+
+                                <div class="form-group col-sm-12">
+                                    <label for="nombre">Categoria <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    <input name="nombre" type="text" class="form-control myInput" id="nombre" required>
+                                </div>
+
+                            </div>
+                            <button type="submit" id="crear" class="myBtn myBtn-rounded myBtn-3d m-0 mt-10">Guardar</button>
+
+
+                        }
+
+
+                    </div>
+
+                    <br />
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </section>
+
+    @*<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+    </script>*@
+
+
+
+
+
+
+

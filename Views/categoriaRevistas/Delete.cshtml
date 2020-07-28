@@ -1,0 +1,36 @@
+﻿@model DINTRANET.Models.categoriaRevista
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contenedor_forms">
+    <h2>Eliminar Categoria De Revista</h2>
+
+    <h3>Estas Seguro que Deseas Eliminar el Registro?</h3>
+    <div>
+        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.categoria)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.categoria)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar a la Lista", "Index")
+            </div>
+        }
+    </div>
+
+</div>

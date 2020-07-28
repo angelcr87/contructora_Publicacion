@@ -1,0 +1,101 @@
+﻿@model IEnumerable<DINTRANET.Models.eventos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contenedor_forms">
+    <h2>Administrador de Eventos</h2>
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","eventos")'">Crear Nuevo</button>
+    </p>
+    <div class="table-responsive">
+        <table id="listaEventos" class="display" style="width:100%">
+            <thead class="tableHead">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.titulo)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.descripcion)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre_Adjunto)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha_Inicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha_final)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.titulo)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.descripcion)
+                            </td>*@
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre_Adjunto)
+                        </td>
+
+                        <td>
+
+                            @String.Format("{0:dd/MM/yyyy}", item.fecha_Inicio)
+                        </td>
+                        <td>
+
+                            @String.Format("{0:dd/MM/yyyy}", item.fecha_final)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.eventoId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.eventoId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.eventoId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="tableFoot">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.titulo)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.descripcion)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre_Adjunto)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha_Inicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha_final)
+                    </th>
+
+                    <th></th>
+                </tr>
+
+            </tfoot>
+
+        </table>
+    </div>
+    </div>

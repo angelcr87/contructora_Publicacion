@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DINTRANET.Models.categoriaConvenios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Administrador de Categoria de Convenios</h2>
+
+    <p>
+        @*@Html.ActionLink("Crear Nuevo", "Create")*@
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","categoriaConvenios")'">Crear Nuevo</button>
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Lista","convenios")'">Regresar a Convenios</button>
+    </p>
+    <div class="table-responsive">
+        <table id="listaCategoriaConvenios" class="display" style="width:100%">
+            <thead class="tableHead">
+                <tr>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.usuarios.nickName)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoria)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.usuarios.nickName)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.categoria)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.categoriaId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.categoriaId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.categoriaId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="tableFoot">
+                <tr>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.usuarios.nickName)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoria)
+                    </th>
+                    <th></th>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+    </div>

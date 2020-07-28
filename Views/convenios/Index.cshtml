@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DINTRANET.Models.convenio>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="portfolio" id="portfolio">
+    <div class="container-fluid">
+        <div class="row">
+           
+
+            <div class="container clearfix">
+
+                <div class="header-line">
+                    <h1>Convenios</h1>
+
+                </div>
+
+            </div>
+
+            @*<div align="center">
+                    <button class="filter-button" data-filter="all">TODOS</button>
+                    <button class="filter-button" data-filter="universidad">UNIVERSITARIOS</button>
+                    <button class="filter-button" data-filter="restaurant">RESTAURANTES</button>
+                    <button class="filter-button" data-filter="category3">BANCARIOS</button>
+                </div>*@
+
+            <div align="center">
+                @*<button class="btn btn-default"   onclick="location.href='@Url.Action("Create","convenios")'">Agregar Convenio</button>*@
+
+                <button class="filter-button" data-filter="all">TODOS</button>
+                @foreach (var group in Model.GroupBy(item => item.categoriaConvenios.categoria))
+                {
+                    <button class="filter-button" data-filter="@Html.Encode(group.Key)"> @Html.Encode(group.Key)</button>
+                }
+            </div>
+           
+                    <br />
+
+                    @foreach (var item in Model)
+                    {
+                        @*<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">*@
+                            <div class="gallery_product col-sm-3 col-xs-6 filter @item.categoriaConvenios.categoria">
+                                <a class="fancybox" rel="ligthbox" href="@Url.Content(item.ubicacionImagen)">
+                                    <img class="img-responsive imgConvenios" alt="" src="@Url.Content(item.ubicacionImagen)" />
+
+                                    <div class='img-info'>
+
+                                        <p>@item.descripcion</p>
+                                    </div>
+
+                                    &nbsp;
+                                </a>
+                            </div>
+                        @*</div>*@
+                    }
+               
+            
+        </div>
+    </div>
+</section>
+
+

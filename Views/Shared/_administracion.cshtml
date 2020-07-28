@@ -1,0 +1,52 @@
+﻿
+
+@if (Session["usuario"] != null)
+{
+
+    var usr = (DINTRANET.Models.usuarios)Session["usuario"];
+
+    if (usr.rolId == 1)
+    {
+        <li>
+            <a href="#">Administracion</a>
+            <ul>
+                <li>
+                    @Html.ActionLink("Galeria", "Lista", "Convenios")
+                </li>
+                <li>
+                    @Html.ActionLink("Eventos", "Index", "eventos")
+                </li>
+                <li>
+                    @Html.ActionLink("Slide de Imagenes", "Index", "Slides")
+                </li>
+                <li>
+                    @Html.ActionLink("Sucursales","index","directorio")
+                </li>
+                @*<li>
+                    @Html.ActionLink("Sitios", "Index", "sitios")
+                </li>*@
+                @*<li>
+                    @Html.ActionLink("Biblioteca", "Lista", "bibliotecas")
+                </li>*@
+                @*<li>
+                    @Html.ActionLink("Revistas", "Lista", "revistas")
+                </li>*@
+                <li>
+                    @Html.ActionLink("Usuarios", "Index", "equipoDIN")
+                </li>
+                @*<li><a href="#">Descuentos de Empleado</a></li>*@
+                @*<li><a href="#">Recibos de Nomina</a></li>*@
+                @*<li><a href="#">Vacantes internos</a></li>*@
+                @*<li><a href="#">Vacantes</a></li>*@
+                @*<li><a href="#">Formato de vacaciones</a></li>*@
+                @*<li><a href="#">Reportes tecnicos</a></li>*@
+
+            </ul>
+        </li>
+
+    }
+
+
+
+
+}

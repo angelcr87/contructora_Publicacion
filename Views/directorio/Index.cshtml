@@ -1,0 +1,150 @@
+﻿@model IEnumerable<DINTRANET.Models.directorio>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contenedor_forms">
+    <h2>Administracion del Sucursales</h2>
+
+    <p>
+
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","directorio")'">Crear Nuevo</button>
+    </p>
+    <div class="table-responsive">
+        <table class="display" style="width:100%" id="listaDirectorio">
+            <thead class="tableHead">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tipo)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.cve_Sucursal)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.sucursal)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.direccion)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.horario_apertura)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.horario_cierrre)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.cve_gerente)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.gerente_zona)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.cve_encargado1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.encargado1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.telefono_suc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ext_suc)
+                        </th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipo)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.cve_Sucursal)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sucursal)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.direccion)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.horario_apertura)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.horario_cierrre)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.cve_gerente)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gerente_zona)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.cve_encargado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.encargado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ext)
+                            </td>*@
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.dirId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.dirId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.dirId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="tableFoot">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.tipo)
+                    </td>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.cve_Sucursal)
+                        </th>*@
+                    <td>
+                        @Html.DisplayNameFor(model => model.sucursal)
+                    </td>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.direccion)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.horario_apertura)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.horario_cierrre)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.cve_gerente)
+                        </th>*@
+                    <td>
+                        @Html.DisplayNameFor(model => model.gerente_zona)
+                    </td>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.cve_encargado1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.encargado1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.telefono_suc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ext_suc)
+                        </th>*@
+                    <td></td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+    </div>

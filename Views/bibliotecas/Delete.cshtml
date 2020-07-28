@@ -1,0 +1,80 @@
+﻿@model DINTRANET.Models.biblioteca
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Eliminar Contenido</h2>
+
+    <h3>Estas Seguro que Deseas Eliminar el Registro?</h3>
+
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.categoriaBiblioteca.categoria)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.categoriaBiblioteca.categoria)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tipoContenidoBiblioteca.tipo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tipoContenidoBiblioteca.tipo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.titulo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.titulo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.descripcion)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.descripcion)
+                </dd>           
+
+               
+
+            </dl>
+
+
+        </div>
+
+        <div class="col-md-4">
+            <img src="@Url.Content(Model.imagenPortada)" style="width:70%; height:auto;" />
+
+
+        </div>
+    </div>
+
+
+
+    <div>
+        
+        <hr />
+        
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar a la Lista", "Lista")
+            </div>
+        }
+    </div>
+
+</div>

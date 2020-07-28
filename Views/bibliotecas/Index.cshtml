@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DINTRANET.Models.biblioteca>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    
+}
+
+
+
+
+
+<section class="portfolio" id="portfolio">
+    <div class="container-fluid">
+        <div class="row">
+
+
+
+            <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 class="gallery-title">Biblioteca</h1>
+            </div>
+
+
+            <div align="center">
+
+                <button class="filter-button" data-filter="all">TODOS</button>
+                @foreach (var group in Model.GroupBy(item => item.categoriaBiblioteca.categoria))
+                {
+
+                    <button class="filter-button" data-filter="@Html.Raw(Html.Encode(group.Key).Replace(" ", "_"))"> @Html.Raw(Html.Encode(group.Key))</button>
+
+                }
+            </div>
+            <br />
+
+            @foreach (var item in Model)
+            {
+                <div class="gallery_product col-sm-3 col-xs-6 filter @item.categoriaBiblioteca.classCategoria">
+
+                     @if (item.tipoId == 1)
+                     {
+                        <a class="fancybox" rel="ligthbox" href="@Url.Content(item.ubicacion)">
+                            <img class="img-responsive imgBiblioteca" alt="" src="@Url.Content(item.imagenPortada)" />
+                            <div class='img-info'>
+
+                                <p>@item.titulo</p>
+                            </div>
+                        </a>
+
+                     }
+
+                    @if (item.tipoId == 2)
+                    {
+                     
+                            <a class="fancybox" rel="ligthbox" href="@Url.Content(item.ubicacion)#toolbar=0&navpanes=0&scrollbar=0">
+                                <img class="img-responsive imgBiblioteca" alt="" src="@Url.Content(item.imagenPortada)" />
+                                <div class='img-info'>
+
+                                    <p>@item.titulo</p>
+                                </div>
+                            </a>
+                        
+
+                    }
+
+                    @*<a class="fancybox" rel="ligthbox" href="@Url.Content(item.imagenPortada)">
+                        <img class="img-responsive" alt="" src="@Url.Content(item.imagenPortada)" />
+                        <div class='img-info'>
+
+                            <p>@item.titulo</p>
+                        </div>
+                    </a>*@
+                </div>
+
+
+            }
+
+
+
+
+
+        </div>
+    </div>
+</section>
+
+<script language="JavaScript">
+        document.oncontextmenu = function(){return false}
+        if (history.forward(1)){location.replace(history.forward(1))}
+</script>
+
+
+
+

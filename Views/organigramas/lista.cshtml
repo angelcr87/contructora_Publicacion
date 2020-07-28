@@ -1,0 +1,62 @@
+﻿@*@model IEnumerable<DINTRANET.Models.organigrama>*@
+
+
+<link href="~/Content/OrgChart_Master/jquery.orgchart.css" rel="stylesheet" />
+<script src="~/Scripts/lista/lista.js"></script>
+
+
+@{
+    ViewBag.Title = "lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="contenedor_forms">
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#admon">Administracion</a></li>
+            <li><a data-toggle="tab" href="#operaciones">Operaciones</a></li>
+            <li><a data-toggle="tab" href="#contraloria">Contraloria</a></li>
+            <li><a data-toggle="tab" href="#mercadotecnia">Mercadotecnia</a></li>
+            <li><a data-toggle="tab" href="#programacion">Programacion</a></li>
+        </ul>
+    </div>
+
+
+    <div class="tab-content">
+        <div id="admon" class="tab-pane fade in active">
+
+            <div id="chart-administracion"></div>
+
+        </div>
+
+        <div id="operaciones" class="tab-pane fade">
+
+            <div id="chart-operaciones"></div>
+        </div>
+
+        <div id="programacion" class="tab-pane fade">
+
+            <div id="chart-programacion"></div>
+        </div>
+
+        <div id="contraloria" class="tab-pane fade">
+
+            <div id="chart-contraloria"></div>
+        </div>
+
+        <div id="mercadotecnia" class="tab-pane fade">
+
+            <div id="chart-mercadotecnia"></div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+    <script src="~/Scripts/OrgChart_Master/js/jquery.orgchart.js"></script>
+   

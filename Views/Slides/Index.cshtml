@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DINTRANET.Models.Slide>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Administrador de Imagenes del Slide</h2>
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","Slides")'">Crear Nuevo</button>
+    </p>
+    <div class="table-responsive">
+        <table id="listaSlider" class="display" style="width:100%">
+            <thead class="tableHead">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.slideId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.slideId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.slideId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot class="tableFoot">
+                <tr>
+
+                    <td>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </td>
+                    <td></td>
+                </tr>
+
+            </tfoot>
+
+        </table>
+    </div>
+    </div>

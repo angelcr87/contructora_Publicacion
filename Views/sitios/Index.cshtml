@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DINTRANET.Models.sitios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Catalogo de Sitios</h2>
+
+    <p>       
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","sitios")'">Crear Nuevo</button>
+    </p>
+    <div class="table-responsive">
+        <table id="listaSitios" class="display" style="width:100%;">
+            <thead class="tableHead">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreSitio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreContacto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.telefonoContacto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.direccionContacto)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreSitio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreContacto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefonoContacto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.direccionContacto)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.sitioId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.sitioId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.sitioId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot class="tableFoot">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.nombreSitio)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.nombreContacto)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.telefonoContacto)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.direccionContacto)
+                    </td>
+                    <td></td>
+                </tr>
+
+
+            </tfoot>
+
+        </table>
+    </div>
+    </div>

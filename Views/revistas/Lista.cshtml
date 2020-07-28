@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DINTRANET.Models.revista>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="contenedor_forms">
+    <h2>Administrador de Revistas</h2>
+
+    <p>
+        
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","revistas")'">Crear Revista</button>
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Index","categoriaRevistas")'">Administrador de Categorias</button>
+    </p>
+    <div class=table-responsive>
+        <table id="listaRevistas" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoriaRevista.categoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreRevista)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcionRevista)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ubicacionPortadaRevista)
+                    </th>                 
+                   
+                    <th></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.categoriaRevista.categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreRevista)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcionRevista)
+                    </td>
+                    <td>
+                        <a data-fancybox="gallery" href="@Url.Content(item.ubicacionPortadaRevista)">
+                            <img src="@Url.Content(item.ubicacionPortadaRevista)" alt="@item.nombreRevista" style="height: 50px; width: 50px;" />
+                        </a>
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.revistaId }) |*@
+                        @Html.ActionLink("Detalles", "Details", new { id = item.revistaId }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.revistaId })
+                    </td>
+                </tr>
+            }
+
+            <tfoot>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.categoriaRevista.categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.nombreRevista)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.descripcionRevista)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ubicacionPortadaRevista)
+                    </td>
+                   
+                    <td></td>
+                </tr>
+            </tfoot>
+
+        </table>
+     </div>
+
+    </div>

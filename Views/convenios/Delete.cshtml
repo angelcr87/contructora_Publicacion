@@ -1,0 +1,93 @@
+﻿@model DINTRANET.Models.convenio
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Eliminar</h2>
+
+                <h3>Deseas Eliminar este Registro?</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-8">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.categoriaConvenios.categoria)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.categoriaConvenios.categoria)
+                    </dd>
+
+                    @*<dt>
+                        @Html.DisplayNameFor(model => model.usuarios.nickName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.usuarios.nickName)
+                    </dd>*@
+
+                    @*<dt>
+                        @Html.DisplayNameFor(model => model.ubicacionImagen)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ubicacionImagen)
+                    </dd>*@
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.descripcion)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.fechaVigencia)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.fechaVigencia)
+                    </dd>
+
+                    @*<dt>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </dt>*@
+
+                    @*<dd>
+                        @Html.DisplayFor(model => model.estado)
+                    </dd>*@
+
+                </dl>
+
+            </div>
+            <div class="col-md-4">
+                <img src="@Url.Content(Model.ubicacionImagen)" style="width:70%; height:auto;" />
+
+            </div>
+        </div>
+
+        <div>
+         
+            
+
+            @using (Html.BeginForm())
+        {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                    @Html.ActionLink("Regresar a la Lista", "Lista")
+                </div>
+        }
+        </div>
+    </div>
+</div>

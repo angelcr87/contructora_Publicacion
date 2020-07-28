@@ -1,0 +1,105 @@
+﻿@model IEnumerable<DINTRANET.Models.biblioteca>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Administrador de la Biblioteca</h2>
+
+    <p>
+        
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","bibliotecas")'">Crear Nuevo</button>
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Index","categoriaBibliotecas")'">Administrador de Categorias</button>
+    </p>
+    <div class=table-responsive>
+        <table id="listaBiblioteca" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoriaBiblioteca.categoria)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tipoContenidoBiblioteca.tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.titulo)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.descripcion)
+                </th>*@
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.ubicacion)
+                </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.imagenPortada)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.categoriaBiblioteca.categoria)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipoContenidoBiblioteca.tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.titulo)
+                        </td>
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>*@
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.ubicacion)
+                    </td>*@
+                        <td>
+                            <a data-fancybox="gallery" href="@Url.Content(item.imagenPortada)">
+                                <img src="@Url.Content(item.imagenPortada)" alt="@item.titulo" style="height: 50px; width: 50px;" />
+                            </a>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.bibliotecaId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.bibliotecaId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.bibliotecaId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.categoriaBiblioteca.categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.tipoContenidoBiblioteca.tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.titulo)
+                    </td>
+                    @*<th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>*@
+                    @*<th>
+                @Html.DisplayNameFor(model => model.ubicacion)
+            </th>*@
+                    <td>
+                        @Html.DisplayNameFor(model => model.imagenPortada)
+                    </td>
+                    <td></td>
+                </tr>
+
+
+            </tfoot>
+
+
+        </table>
+
+    </div>
+
+    </div>

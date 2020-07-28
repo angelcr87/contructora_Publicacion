@@ -1,0 +1,49 @@
+﻿@model DINTRANET.Models.Slide
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Detalles</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div>
+
+                <hr />
+                <dl class="dl-horizontal">
+                    
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.descripcion)
+                    </dd>
+
+                </dl>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-4">
+            <img src="@Url.Content(Model.imagen)" style="width:70%; height:auto;" />
+
+        </div>
+
+
+    </div>
+  
+    <br />
+    <br />
+   
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.slideId }) |
+        @Html.ActionLink("Regresar a la Lista", "Index")
+    </p>
+
+</div>

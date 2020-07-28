@@ -1,0 +1,118 @@
+﻿@model IEnumerable<DINTRANET.Models.revista>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <br />
+    <div id="encabezado" >
+    <h2>Portafolio de Revistas</h2>
+    </div>
+    <center>
+        <select id="dropcategorias" class="js-example-basic-multiple">
+            <option value="">-- Selecciona una categoria --</option>
+            @foreach (var cat in Model.GroupBy(c => c.categoriaRevista.categoria))
+            {
+
+                <option value="@Html.Encode(cat.Key).Replace(" ","_")">@Html.Encode(cat.Key)</option>
+
+
+            }
+        </select>
+    </center>
+    
+        <div class="main">
+
+            @foreach (var groupCat in Model.GroupBy(c => c.categoriaRevista.categoria))
+            {
+                <br /><br />
+                <div id="@Html.Encode(groupCat.Key).Replace(" ","_")" class="categoriaDIV">
+
+                    <h2> @Html.Encode(groupCat.Key) </h2>
+
+                    <div class="rowRevista">
+                        @foreach (var item in groupCat)
+                {
+
+               <!-- Portfolio Gallery Grid -->
+
+                            <div class="column">
+                                <div class="contentRevista">
+                                    @*<a class="fancybox" rel="ligthbox" href="@Url.Content(item.ubicacionRevista)">*@
+                                    <a data-fancybox data-type="iframe" data-src="@Url.Content(item.ubicacionRevista)" href="javascript:;" data-options='{"type" : "iframe", "iframe" : {"preload" : false, "css" : {"width" : "100%"}}}'>
+                                        <center>
+                                            <img src="@Url.Content(item.ubicacionPortadaRevista)" alt="@item.nombreRevista" style="max-width:80%; max-height:auto; ">
+                                        </center>
+                                        <h3>@item.nombreRevista</h3>
+                                        <p style="color:white;">@item.descripcionRevista</p>
+
+                                    </a>
+                                </div>
+                            </div>
+
+
+
+
+                    <!-- END GRID -->
+                            @*<div class="content">
+                                    <img src="/w3images/p3.jpg" alt="Bear" style="width:100%">
+                                    <h3>Some Other Work</h3>
+                                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                                    <p>Lorem ipsum dolor sit amet, tempor prodesset eos no. Temporibus necessitatibus sea ei, at tantas oporteat nam. Lorem ipsum dolor sit amet, tempor prodesset eos no.</p>
+                                </div>*@
+
+
+
+                        }
+                    </div>
+
+                </div>
+            }
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+       
+
+        $('#dropcategorias').on('change', function () {
+            var valor = $(this).val();
+
+            //var div = document.getElementsByClassName("#main");
+            var divs = document.getElementsByClassName("categoriaDIV");
+            for (i = 0; i < divs.length; i++) {
+                //div = divs[i].getElementsByClassName("categoriaDIV")[0];
+                
+
+                if (divs[i].id == valor) {
+                    $('#' + divs[i].id).show();
+
+                }
+                else {
+                    $('#' + divs[i].id).hide();
+                }
+
+                if (valor == "") {
+                    $('#' + divs[i].id).show();
+                }
+            }
+        });
+
+    });
+
+
+</script>

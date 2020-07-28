@@ -1,0 +1,65 @@
+﻿@model DINTRANET.Models.Slide
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Eliminar</h2>
+
+    <h3>Estas segura que deseas eliminar la imagen?</h3>
+    <div>
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.imagen)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.imagen)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.descripcion)
+                    </dd>
+
+                </dl>
+
+
+            </div>
+
+            <div class="col-md-4">
+
+                <img src="@Url.Content(Model.imagen)" style="width:70%; height:auto;" />
+
+            </div>
+
+
+        </div>
+       
+
+
+        
+        
+
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar a la Lista", "Index")
+            </div>
+        }
+    </div>
+
+</div>

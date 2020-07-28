@@ -1,0 +1,51 @@
+﻿
+@if (Session["usuario"] != null)
+{
+    //using (Html.BeginForm("cerrarSession", "sesiones", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    //{
+    @Html.AntiForgeryToken()
+    var usr = (DINTRANET.Models.usuarios)Session["usuario"];
+
+    <hr class="post-divider">
+
+
+    @*<h3 class="mt-40"><span class="text-theme">Comentamos</span> lo que piensas:</h3>*@
+    <h3 class="mt-40"><span class="text-theme">Agrega</span> tus comentarios:</h3>
+
+
+                                <form>
+
+
+                                    @*<div class="row">
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="name">Nombre <span class="text-lightred" style="font-size: 15px">*</span></label>
+                                            <input name="name" type="text" class="form-control myInput" id="name" required>
+                                        </div>
+
+                                        <div class="form-group col-sm-4">
+                                            <label for="email">Email</label>
+                                            <input name="email" type="email" class="form-control myInput" id="email">
+                                        </div>                                     
+
+                                    </div>*@
+
+                                    <div class="row">
+
+                                        <div class="form-group col-sm-12">
+                                            <label for="comment">Comentarios <span class="text-lightred" style="font-size: 15px">*</span></label>
+                                            <textarea name="comment" class="form-control myInput" id="comment" rows="8" required></textarea>
+                                        </div>
+
+                                    </div>
+
+                                    <button type="submit" class="myBtn myBtn-rounded myBtn-3d m-0 mt-10">Comentar</button>
+
+
+                                </form>
+
+
+}
+
+
+

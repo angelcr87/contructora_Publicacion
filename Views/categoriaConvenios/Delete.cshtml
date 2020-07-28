@@ -1,0 +1,41 @@
+﻿@model DINTRANET.Models.categoriaConvenios
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Eliminar</h2>*@
+
+<h3>Estas Seguro de Eliminar?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.usuarios.nickName)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.usuarios.nickName)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la Lista", "Index")
+        </div>
+    }
+</div>

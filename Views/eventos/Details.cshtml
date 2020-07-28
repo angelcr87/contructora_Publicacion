@@ -1,0 +1,74 @@
+﻿@model DINTRANET.Models.eventos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Detalles</h2>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.titulo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.titulo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre_Adjunto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre_Adjunto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.tipo_Adjunto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tipo_Adjunto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fecha_Inicio)
+            </dt>
+
+            <dd>
+
+                @String.Format("{0:dd/MM/yyyy}", @Html.DisplayFor(model => model.fecha_Inicio))
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fecha_final)
+            </dt>
+
+            <dd>
+
+                @String.Format("{0:dd/MM/yyyy}", @Html.DisplayFor(model => model.fecha_final))
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.eventoId }) |
+        @Html.ActionLink("Regresar a la lista", "Index")
+    </p>
+
+</div>

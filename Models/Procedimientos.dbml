@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DIN_INTRANET" Class="ProcedimientosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-GH1D70J\SQLEXPRESS2008R2;Initial Catalog=DIN_INTRANET;Persist Security Info=True;User ID=sa;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DIN_INTRANETConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.RESINCRONIZAR_NICKNAMES" Method="RESINCRONIZAR_NICKNAMES">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SINCRONIZAR_USUARIOS" Method="SINCRONIZAR_USUARIOS">
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

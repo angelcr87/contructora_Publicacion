@@ -1,0 +1,887 @@
+﻿@model DINTRANET.Models.directorio
+
+@{
+    ViewBag.Title = "Edit";
+    List<DINTRANET.Models.equipoDIN> usr = ViewBag.equipo;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="contenedor_forms">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Editar Contacto</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.dirId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    <select class="form-control" name="tipo" id="tipo" required>
+                        <option value="0">Seleccione...</option>
+
+
+                        @if (Model.tipo == "empenios")
+                        {
+                            <option value="empenios" selected="selected">EMPEÑOS</option>
+                            <option value="Staff">STAFF</option>
+                            <option value="ventas">VENTAS</option>
+                        }
+                        @if (Model.tipo == "Staff")
+                        {
+                            <option value="empenios">EMPEÑOS</option>
+                            <option value="Staff" selected="selected">STAFF</option>
+                            <option value="ventas">VENTAS</option>
+                        }
+
+                        @if (Model.tipo == "ventas")
+                        {
+                            <option value="empenios">EMPEÑOS</option>
+                            <option value="Staff" >STAFF</option>
+                            <option value="ventas" selected="selected">VENTAS</option>
+                        }
+
+                    </select>
+                    @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group" id="suc">
+                @Html.LabelFor(model => model.sucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="js-example-basic-multiple" style="width:100%;" name="sucursal" id="selsucursal">
+                        <option value="">Seleccione...</option>
+                        @foreach (var item in ViewBag.suc)
+                        {
+                            if (Model.cve_Sucursal == item.Value)
+                            {
+                                <option value="@item.Value" selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+
+                        }
+
+                    </select>
+
+
+                    @Html.ValidationMessageFor(model => model.sucursal, "", new { @class = "text-danger", id = "validSuc" })
+                </div>
+            </div>
+
+
+            <div class="form-group" id="deps">
+
+                <label class="control-label col-md-2">Departamento</label>
+                <div class="col-md-10">
+                    <select class="js-example-basic-multiple" style="width:100%;" name="departamento" id="seldepartamento">
+                        <option value="">Seleccione...</option>
+                        @foreach (var item in ViewBag.deps)
+                        {
+                            if (Model.cve_Sucursal == item.Value)
+                            {
+                                <option value="@item.Value" selected="selected">@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+
+                        }
+                    </select>
+
+
+                    @Html.ValidationMessageFor(model => model.sucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="divDireccion">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div id="divEmailSucursal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.email_Sucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.email_Sucursal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.email_Sucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.horario_apertura, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.horario_apertura, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="time" name="horario_apertura" class="form-control" required value="@Model.horario_apertura" />
+                        @Html.ValidationMessageFor(model => model.horario_apertura, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.horario_cierrre, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.horario_cierrre, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="time" name="horario_cierrre" class="form-control" required value="@Model.horario_cierrre" />
+                        @Html.ValidationMessageFor(model => model.horario_cierrre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.gerente_zona, htmlAttributes: new { @class = "control-label col-md-2", @id = "gerente_zona" })
+                    <div class="col-md-10">
+                        <select class="js-example-basic-multiple" style="width:100%;" name="gerente" required id="selgerente">
+                            <option value="">Seleccione...</option>
+                            @foreach (var item in usr)
+                            {
+                                if (Model.cve_gerente == item.Em_Codigo_Alterno)
+                                {
+                                    <option value="@item.Em_Codigo_Alterno" selected="selected">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+
+                                }
+                                else
+                                {
+                                    <option value="@item.Em_Codigo_Alterno">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                }
+
+
+                            }
+
+
+                        </select>
+
+                        @Html.ValidationMessageFor(model => model.gerente_zona, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cel_gerente, htmlAttributes: new { @class = "control-label col-md-2", @id = "lblcel_gerente" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.cel_gerente, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.cel_gerente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.email_gerente, htmlAttributes: new { @class = "control-label col-md-2", @id = "email_gerente" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.email_gerente, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email_gerente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="divtelefono_suc">
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.telefono_suc, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" id="telefono"></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.telefono_suc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.telefono_suc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div id="divext_suc">
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.ext_suc, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" id="ext"></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ext_suc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ext_suc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div id="divubicacion">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ubicacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.TextAreaFor(model => model.ubicacion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ubicacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+                <div id="divEncargado1">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.encargado1, htmlAttributes: new { @class = "control-label col-md-2", @id = "lblencargado1" })
+                        <div class="col-md-10">
+                            @*<select class="js-example-basic-multiple form-control" name="encargado[]" multiple="multiple">*@
+                            <select class="js-example-basic-multiple" style="width:100%;" name="encargado1" id="selencargado1">
+                                <option value="">Seleccione...</option>
+                                @foreach (var item in usr)
+                                {
+                                    if (Model.cve_encargado1 == item.Em_Codigo_Alterno)
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno" selected="selected">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                }
+
+
+                            </select>
+
+                            @Html.ValidationMessageFor(model => model.encargado1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email_encargado1, htmlAttributes: new { @class = "control-label col-md-2", @id = "lblemail_encargado1" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email_encargado1, new { htmlAttributes = new { @class = "form-control", } })
+                            @Html.ValidationMessageFor(model => model.email_encargado1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div id="divCelEncargado1">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cel_encargado1, htmlAttributes: new { @class = "control-label col-md-2", @id = "lblcel_encargado1" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.cel_encargado1, new { htmlAttributes = new { @class = "form-control", } })
+                                @Html.ValidationMessageFor(model => model.cel_encargado1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+
+                        <button type="button" class="btn btn-default" id="btnAgregarAliado">Agregar Aliado</button>
+                    </div>
+                </div>
+
+
+                <div id="divencargado2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.encargado2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*<select class="js-example-basic-multiple form-control" name="encargado[]" multiple="multiple">*@
+                            <select class="js-example-basic-multiple" style="width:100%;" name="encargado2" id="encargado2">
+                                <option value="">Seleccione...</option>
+                                @foreach (var item in usr)
+                                {
+                                    if (Model.cve_encargado2 == item.Em_Codigo_Alterno)
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno" selected="selected">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                }
+
+
+                            </select>
+
+                            @Html.ValidationMessageFor(model => model.encargado2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email_encargado2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email_encargado2, new { htmlAttributes = new { @class = "form-control", } })
+                            @Html.ValidationMessageFor(model => model.email_encargado2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cel_encargado2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cel_encargado2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.cel_encargado2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="divencargado3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.encargado3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*<select class="js-example-basic-multiple form-control" name="encargado[]" multiple="multiple">*@
+                            <select class="js-example-basic-multiple" style="width:100%;" name="encargado3" id="encargado3">
+                                <option value="">Seleccione...</option>
+                                @foreach (var item in usr)
+                                {
+                                    if (Model.cve_encargado3 == item.Em_Codigo_Alterno)
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno" selected="selected">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                }
+
+
+                            </select>
+
+                            @Html.ValidationMessageFor(model => model.encargado3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email_encargado3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email_encargado3, new { htmlAttributes = new { @class = "form-control", } })
+                            @Html.ValidationMessageFor(model => model.email_encargado3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cel_encargado3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cel_encargado3, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.cel_encargado3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="divencargado4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.encargado4, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*<select class="js-example-basic-multiple form-control" name="encargado[]" multiple="multiple">*@
+                            <select class="js-example-basic-multiple" style="width:100%;" name="encargado4" id="encargado4">
+                                <option value="">Seleccione...</option>
+                                @foreach (var item in usr)
+                                {
+                                    if (Model.cve_encargado4 == item.Em_Codigo_Alterno)
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno" selected="selected">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                }
+
+
+                            </select>
+
+                            @Html.ValidationMessageFor(model => model.encargado4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email_encargado4, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email_encargado4, new { htmlAttributes = new { @class = "form-control", } })
+                            @Html.ValidationMessageFor(model => model.email_encargado4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cel_encargado4, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cel_encargado4, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.cel_encargado4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="divencargado5">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.encargado5, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*<select class="js-example-basic-multiple form-control" name="encargado[]" multiple="multiple">*@
+                            <select class="js-example-basic-multiple" style="width:100%;" name="encargado5" id="encargado5">
+                                <option value="">Seleccione...</option>
+                                @foreach (var item in usr)
+                                {
+                                    if (Model.cve_encargado5 == item.Em_Codigo_Alterno)
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno" selected="selected">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Em_Codigo_Alterno">@item.Em_Nombre @item.Em_Apellido_Paterno @item.Em_Apellido_Materno </option>
+                                    }
+                                }
+
+
+                            </select>
+
+                            @Html.ValidationMessageFor(model => model.encargado5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.email_encargado5, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email_encargado5, new { htmlAttributes = new { @class = "form-control", } })
+                            @Html.ValidationMessageFor(model => model.email_encargado5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cel_encargado5, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cel_encargado5, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.cel_encargado5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Guardar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+    }
+
+    <div>
+        @Html.ActionLink("Regresar a la Lista", "Index")
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#suc").hide();
+            //$("#deps").hide();
+            $("#deps").attr("required", false);
+            $("#suc").attr("required", false);            
+            $("#divDireccion").attr("required", false);
+            
+
+            $("#divencargado2").hide();
+            $("#divencargado3").hide();
+            $("#divencargado4").hide();
+            $("#divencargado5").hide();
+
+            if ($("#tipo").val() == "empenios") {
+                //$("#deps").hide();
+                //$("#divEmailEncargado1").hide();
+                //$("#telefono").text("Telefono Sucursal");
+                //$("#ext").text("Ext Sucursal");
+                //$("#divEmailSucursal").show();
+
+                //$("#gerente_zona").text("Gerente");
+                //$("#lblcel_gerente").text("Cel Gerente");
+                //$("#email_gerente").text("Correo Gerente");
+
+                //$("#lblencargado1").text("Encargado");
+                //$("#lblemail_encargado1").text("email Encargado");
+                //$("#lblcel_encargado1").text("Cel Encargado");
+                //$("#btnAgregarAliado").hide();
+
+                $("#suc").show();
+                $("#suc").attr("required", true);
+                $("#deps").hide();
+                $("#deps").attr("required", false);
+
+                $("#telefono").text("Telefono Sucursal");
+                $("#ext").text("Ext Sucursal");
+                $("#gerente_zona").text("Gerente");
+                $("#lblcel_gerente").text("Cel Gerente");
+                $("#email_gerente").text("Email Gerente");
+
+                $("#lblencargado1").text("Encargado ");
+                $("#lblemail_encargado1").text("email Encargado");
+                $("#lblcel_encargado1").text("Cel Encargado");
+
+
+
+                $("#crearDir").attr("disabled", false);
+                $("#divDireccion").show();
+                $("#divEmailSucursal").show();
+                $("#divCelEncargado1").show();
+                $("#btnAgregarAliado").hide();
+
+                $("#divtelefono_suc").show();
+                $("#divext_suc").show();
+                $("#divubicacion").show();
+                
+            }
+
+            if ($("#tipo").val() == "ventas") {
+                //$("#deps").hide();
+                //$("#divEmailEncargado1").hide();
+                //$("#telefono").text("Telefono Sucursal");
+                //$("#ext").text("Ext Sucursal");
+                //$("#divEmailSucursal").hide();
+                //$("#divubicacion").hide();
+                //$("#divtelefono_suc").hide();
+                //$("#divext_suc").hide();
+
+                //$("#gerente_zona").text("Encargado Empeños");
+                //$("#lblcel_gerente").text("Telefono Empeños");
+                //$("#email_gerente").text("Email Empeños");
+                
+
+
+                //$("#lblencargado1").text("Encargado Ventas");
+                //$("#lblemail_encargado1").text("Correo Ventas");
+                //$("#btnAgregarAliado").hide();
+
+                
+                $("#suc").show();
+                $("#suc").attr("required", true);
+                $("#deps").hide();
+                $("#deps").attr("required", false);
+
+                $("#telefono").text("Telefono Sucursal");
+                $("#ext").text("Ext Sucursal");
+                $("#gerente_zona").text("Encargado Empeños");
+                $("#lblcel_gerente").text("Telefono Empeños");
+                $("#email_gerente").text("Email Empeños");
+
+
+                $("#lblencargado1").text("Encargado Ventas");
+                $("#lblemail_encargado1").text("Correo Ventas");
+                $("#lblcel_encargado1").text("Telefono Ventas");
+
+                $("#crearDir").attr("disabled", false);
+                $("#divDireccion").hide();
+                $("#divEmailSucursal").hide();
+                $("#divCelEncargado1").show();
+                $("#btnAgregarAliado").hide();
+                $("#divtelefono_suc").hide();
+                $("#divext_suc").hide();
+                $("#divubicacion").hide();
+
+            }
+
+            if ($("#tipo").val() == "Staff") {
+                //$("#suc").hide();
+                //$("#telefono").text("Telefono Departamento");
+                //$("#ext").text("Ext Departamento");
+                //$("#divDireccion").hide();
+                //$("#divEmailEncargado1").show();
+                //$("#divEmailSucursal").hide();
+                //$("#divubicacion").hide();
+                //$("#divtelefono_suc").hide();
+                //$("#divext_suc").hide();
+                
+                //$("#gerente_zona").text("Jefe de Area");
+                //$("#lblcel_gerente").text("Cel Jefe");
+                //$("#email_gerente").text("Email Jefe");
+               
+
+                //$("#lblencargado1").text("Aliado");
+                //$("#lblemail_encargado1").text("Correo Aliado");
+                //$("#lblcel_encargado1").text("Cel Aliado");
+                //$("#btnAgregarAliado").show();
+
+                $("#selsucursal").val("0");
+                $("#deps").show();
+                $("#deps").attr("required", true);
+                $("#suc").hide();
+                $("#suc").attr("required", false);
+                $("#telefono").text("Telefono Departamento");
+                $("#ext").text("Ext Departamento");
+                $("#gerente_zona").text("Jefe de Area");
+                $("#lblcel_gerente").text("Cel Jefe");
+                $("#email_gerente").text("Email Jefe");
+
+
+                $("#lblencargado1").text("Aliado");
+                $("#lblemail_encargado1").text("Correo Aliado");
+                $("#lblcel_encargado1").text("Cel Aliado");
+
+                $("#crearDir").attr("disabled", false);
+                $("#divDireccion").hide();
+                $("#divEmailSucursal").hide();
+                $("#divCelEncargado1").show();
+                $("#btnAgregarAliado").show();
+                $("#divtelefono_suc").hide();
+                $("#divext_suc").hide();
+                $("#divubicacion").hide();
+            }
+
+
+
+
+            $('#tipo').on('change', function () {
+                var valor = $(this).val();
+
+                var encargado = $("#selencargado1").val();
+
+                if (valor == "empenios") {
+                    //$("#seldepartamento").val("0");
+                    //$("#suc").show();
+                    //$("#suc").attr("required", true);
+                    //$("#deps").hide();
+                    //$("#deps").attr("required", false);
+
+                    //$("#telefono").text("Telefono Sucursal");
+                    //$("#ext").text("Ext Sucursal");
+                    //$("#gerente_zona").text("Gerente");
+                    //$("#lblcel_gerente").text("Cel Gerente");
+                    //$("#email_gerente").text("Correo Gerente");
+
+                    //$("#lblencargado1").text("Encargado");
+                    //$("#lblemail_encargado1").text("email Encargado");
+                    //$("#lblcel_encargado1").text("Cel Encargado");
+                    //$("#btnAgregarAliado").hide();
+                    
+
+                    //$("#crearDir").attr("disabled", false);
+                    //$("#divDireccion").show();
+                    //$("#divEmailSucursal").show();
+                    //$("#divEmailEncargado1").hide();
+
+
+                    $("#seldepartamento").val("0");
+                    $("#suc").show();
+                    $("#suc").attr("required", true);
+                    $("#deps").hide();
+                    $("#deps").attr("required", false);
+
+                    $("#telefono").text("Telefono Sucursal");
+                    $("#ext").text("Ext Sucursal");
+                    $("#gerente_zona").text("Gerente");
+                    $("#lblcel_gerente").text("Cel Gerente");
+                    $("#email_gerente").text("Email Gerente");
+
+                    $("#lblencargado1").text("Encargado ");
+                    $("#lblemail_encargado1").text("email Encargado");
+                    $("#lblcel_encargado1").text("Cel Encargado");
+
+
+
+                    $("#crearDir").attr("disabled", false);
+                    $("#divDireccion").show();
+                    $("#divEmailSucursal").show();
+                    $("#divCelEncargado1").show();
+                    $("#btnAgregarAliado").hide();
+
+                    $("#divtelefono_suc").show();
+                    $("#divext_suc").show();
+                    $("#divubicacion").show();
+                }
+
+                if (valor == "ventas") {
+                    //$("#seldepartamento").val("0");
+                    //$("#suc").show();
+                    //$("#suc").attr("required", true);
+                    //$("#deps").hide();
+                    //$("#deps").attr("required", false);
+
+                    //$("#telefono").text("Telefono Sucursal");
+                    //$("#ext").text("Ext Sucursal");
+                    //$("#gerente_zona").text("Encargado Empeños");
+                    //$("#lblcel_gerente").text("Telefono Empeños");
+                    //$("#email_gerente").text("Email Empeños");
+
+
+                    //$("#lblencargado1").text("Encargado Ventas");
+                    //$("#lblemail_encargado1").text("Correo Ventas");
+                    //$("#btnAgregarAliado").hide();
+                   
+
+                    //$("#crearDir").attr("disabled", false);
+                    //$("#divDireccion").show();
+                    //$("#divEmailSucursal").hide();
+                    //$("#divCelEncargado1").hide();
+
+                    $("#seldepartamento").val("0");
+                    $("#suc").show();
+                    $("#suc").attr("required", true);
+                    $("#deps").hide();
+                    $("#deps").attr("required", false);
+
+                    $("#telefono").text("Telefono Sucursal");
+                    $("#ext").text("Ext Sucursal");
+                    $("#gerente_zona").text("Encargado Empeños");
+                    $("#lblcel_gerente").text("Telefono Empeños");
+                    $("#email_gerente").text("Email Empeños");
+
+
+                    $("#lblencargado1").text("Encargado Ventas");
+                    $("#lblemail_encargado1").text("Correo Ventas");
+                    $("#lblcel_encargado1").text("Telefono Ventas");
+
+                    $("#crearDir").attr("disabled", false);
+                    $("#divDireccion").hide();
+                    $("#divEmailSucursal").hide();
+                    $("#divCelEncargado1").show();
+                    $("#btnAgregarAliado").hide();
+                    $("#divtelefono_suc").hide();
+                    $("#divext_suc").hide();
+                    $("#divubicacion").hide();
+                }
+
+                if (valor == "Staff") {
+
+                    //$("#selsucursal").val("0");
+                    //$("#deps").show();
+                    //$("#deps").attr("required", true);
+                    //$("#suc").hide();
+                    //$("#suc").attr("required", false);
+                    //$("#telefono").text("Telefono Departamento");
+                    //$("#ext").text("Ext Departamento");
+
+                    //$("#gerente_zona").text("Jefe de Area");
+                    //$("#lblcel_gerente").text("Cel Jefe");
+                    //$("#email_gerente").text("Email Jefe");
+
+                    //$("#lblencargado1").text("Aliado");
+                    //$("#lblemail_encargado1").text("Correo Aliado");
+                    //$("#lblcel_encargado1").text("Cel Aliado");
+                    //$("#divCelEncargado1").show();
+                    
+
+                    //$("#crearDir").attr("disabled", false);
+                    //$("#divDireccion").hide();
+                    //$("#divEmailSucursal").hide();
+                    //$("#divEmailEncargado1").show();
+
+                    $("#selsucursal").val("0");
+                    $("#deps").show();
+                    $("#deps").attr("required", true);
+                    $("#suc").hide();
+                    $("#suc").attr("required", false);
+                    $("#telefono").text("Telefono Departamento");
+                    $("#ext").text("Ext Departamento");
+                    $("#gerente_zona").text("Jefe de Area");
+                    $("#lblcel_gerente").text("Cel Jefe");
+                    $("#email_gerente").text("Email Jefe");
+
+
+                    $("#lblencargado1").text("Aliado");
+                    $("#lblemail_encargado1").text("Correo Aliado");
+                    $("#lblcel_encargado1").text("Cel Aliado");
+
+                    $("#crearDir").attr("disabled", false);
+                    $("#divDireccion").hide();
+                    $("#divEmailSucursal").hide();
+                    $("#divCelEncargado1").show();
+                    $("#btnAgregarAliado").show();
+                    $("#divtelefono_suc").hide();
+                    $("#divext_suc").hide();
+                    $("#divubicacion").hide();
+
+                }
+
+                if (valor == 0) {
+                    //$("#suc").hide();
+                    //$("#deps").hide();
+                    //$("#telefono").text("");
+                    //$("#ext").text("");
+                    //$("#crearDir").attr("disabled", true);
+                    //$("#deps").attr("required", false);
+                    //$("#suc").attr("required", false);                    
+                    //$("#divDireccion").hide();
+                    //$("#divEmailSucursal").hide();
+                    //$("#divEmailEncargado1").hide();
+                    
+
+                    //$("#gerente_zona").text("");
+                    //$("#lblcel_gerente").text("");
+                    //$("#email_gerente").text("");
+
+
+                    //$("#lblencargado1").text("");
+                    //$("#lblemail_encargado1").text("");
+                    //$("#lblcel_encargado1").text("");
+                    //$("#divCelEncargado1").hide();
+                    $("#suc").hide();
+                    $("#deps").hide();
+                    $("#telefono").text("");
+                    $("#ext").text("");
+                    $("#crearDir").attr("disabled", true);
+                    $("#deps").attr("required", false);
+                    $("#suc").attr("required", false);
+                    $("#divDireccion").hide();
+                    $("#divEmailSucursal").hide();
+                    $("#divCelEncargado1").show();
+
+
+                    $("#gerente_zona").text("");
+                    $("#lblcel_gerente").text("");
+                    $("#email_gerente").text("");
+
+
+                    $("#lblencargado1").text("");
+                    $("#lblemail_encargado1").text("");
+                    $("#lblcel_encargado1").text("");
+
+                    $("#divtelefono_suc").hide();
+                    $("#divext_suc").hide();
+                    $("#divubicacion").hide();
+                }
+
+
+
+            });
+
+            var btn = 1;
+            var encargado2 = $("#encargado2").val();
+            var encargado3 = $("#encargado3").val();
+            var encargado4 = $("#encargado4").val();
+            var encargado5 = $("#encargado5").val();
+
+
+            if (encargado2 != "") {
+                btn = 2;
+                $("#divencargado2").show();
+
+            }
+
+            if (encargado3 != "") {
+                btn = 3;
+                $("#divencargado3").show();
+
+            }
+
+
+            if (encargado4 != "") {
+                btn = 4;
+                $("#divencargado4").show();
+
+            }
+
+            if (encargado5 != "") {
+                btn = 5;
+                $("#divencargado5").show();
+
+            }
+
+
+            $("#btnAgregarAliado").click(function () {
+
+                btn = btn + 1;
+
+                if (btn <= 5) {
+
+                    $("#divencargado" + btn).show();
+
+                }
+
+
+            });
+
+
+        });
+    </script>
+
+    </div>

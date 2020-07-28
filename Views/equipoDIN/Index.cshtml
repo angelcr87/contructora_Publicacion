@@ -1,0 +1,230 @@
+﻿@model IEnumerable<DINTRANET.Models.equipoDIN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <h2>Directorio DIN</h2>
+    <p>
+
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Sincronizar_Usuarios","equipoDIN")'">Sincronizar Usuarios</button>
+        @*<button class="btn btn-default" onclick="location.href='@Url.Action("Resincronizar_Nicknames","equipoDIN")'">Resincronizar NickNames</button>*@
+    </p>
+
+    <div class=table-responsive>
+        <table id="listaDirectorio" class="display" style="width:100%">
+            <thead class="tableHead">
+                <tr>
+                    <th style="display:none;">
+                        CODIGO ALTERNO
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.imagenPerfil)
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nickName)
+                    </th>
+
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Em_Email)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.De_Descripcion)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pe_Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sucursal)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td style="display:none;">
+                        @Html.HiddenFor(modelItem => item.Em_Codigo_Alterno)
+                    </td>
+                    <td>
+                        <a data-fancybox="gallery" href="@Url.Content(item.imagenPerfil)">
+                            <img src="@Url.Content(item.imagenPerfil)" alt="@item.Em_Nombre" style="height: 50px; width: 50px;" />
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Em_Nombre).ToString().ToLower() @Html.DisplayFor(modelItem => item.Em_Apellido_Paterno).ToString().ToLower() @Html.DisplayFor(modelItem => item.Em_Apellido_Materno).ToString().ToLower()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nickName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Em_Email).ToString().ToLower()
+                        </td>*@
+
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.De_Descripcion).ToString().ToLower()
+                        </td>*@
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pe_Descripcion).ToString().ToLower()
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sucursal).ToString().ToLower()
+                    </td>
+
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                        @*@Html.ActionLink("Ver", "Details", new { /* id=item.PrimaryKey */ })*@
+                        @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                        <a href="#" data-toggle="modal" data-target="#@item.Em_Codigo_Alterno"> Ver </a> |
+                        @Html.ActionLink("Restablecer Contraseña", "restablecerPass", new { usuarioId = item.usuarioId })
+                        
+                    </td>
+                </tr>
+
+
+
+
+                }
+            </tbody>
+            <tfoot class="tableFoot">
+                <tr>
+                    <th style="display:none;">
+                        CODIGO ALTERNO
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.imagenPerfil)
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Em_Email)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.De_Descripcion)
+                        </th>*@
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pe_Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sucursal)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+
+        @foreach (var item in Model)
+        {
+            <!-- Modal -->
+            <div class="modal fade" id="@item.Em_Codigo_Alterno" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            @*<h4 class="modal-title">Crear Categoria</h4>*@
+                            <label for="nombre">@item.Em_Nombre.ToUpper() @item.Em_Apellido_Paterno.ToUpper() @item.Em_Apellido_Materno.ToUpper() (@item.Em_Codigo_Alterno) <span class="text-lightred" style="font-size: 3px">*</span></label>
+                        </div>
+                        <br />
+
+
+                        <div class="modal-body">
+                            <div class="row">
+
+
+
+                                <div class="form-group col-sm-12">
+                                    <label>Ext: <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    @*<input name="@item.Em_Fecha_Ingreso.ToShortDateString()" value="@item.Em_Fecha_Ingreso.ToShortDateString()" type="text" class="form-control myInput" id="@item.Em_Fecha_Ingreso.ToShortDateString()" disabled>*@
+                                    <label for="nombre">@item.Em_Extension_Telefono <span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Departamento: <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    @*<input name="@item.Em_Fecha_Ingreso.ToShortDateString()" value="@item.Em_Fecha_Ingreso.ToShortDateString()" type="text" class="form-control myInput" id="@item.Em_Fecha_Ingreso.ToShortDateString()" disabled>*@
+                                    <label for="nombre">@item.De_Descripcion<span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                </div>
+
+                                @*<div class="form-group col-sm-12">
+                                        <label>Puesto: <span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                        <label for="nombre">@item.Pe_Descripcion<span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                    </div>*@
+                                @*<div class="form-group col-sm-12">
+                                        <label>Sucursal: <span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                        <label for="nombre">@item.Sucursal<span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                    </div>*@
+
+                                <div class="form-group col-sm-12">
+                                    <label>Direccion Sucursal: <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    @*<input name="@item.Em_Fecha_Ingreso.ToShortDateString()" value="@item.Em_Fecha_Ingreso.ToShortDateString()" type="text" class="form-control myInput" id="@item.Em_Fecha_Ingreso.ToShortDateString()" disabled>*@
+                                    <label for="nombre">@item.Sc_Direccion_1<span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Municio: <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    @*<input name="@item.Em_Fecha_Ingreso.ToShortDateString()" value="@item.Em_Fecha_Ingreso.ToShortDateString()" type="text" class="form-control myInput" id="@item.Em_Fecha_Ingreso.ToShortDateString()" disabled>*@
+                                    <label for="nombre">@item.Sc_Municipio<span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Fecha de Ingreso: <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    @*<input name="@item.Em_Fecha_Ingreso.ToShortDateString()" value="@item.Em_Fecha_Ingreso.ToShortDateString()" type="text" class="form-control myInput" id="@item.Em_Fecha_Ingreso.ToShortDateString()" disabled>*@
+                                    <label for="nombre">@item.Em_Fecha_Ingreso.ToShortDateString() <span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Antigüedad: <span class="text-lightred" style="font-size: 3px">*</span></label>
+                                    @*<input name="@item.Em_Fecha_Ingreso.ToShortDateString()" value="@item.Em_Fecha_Ingreso.ToShortDateString()" type="text" class="form-control myInput" id="@item.Em_Fecha_Ingreso.ToShortDateString()" disabled>*@
+                                    <label for="nombre">@item.duracion <span class="text-lightred" style="font-size: 3px">*</span></label>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <br />
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+</div>

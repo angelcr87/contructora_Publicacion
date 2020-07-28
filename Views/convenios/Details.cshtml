@@ -1,0 +1,95 @@
+﻿@model DINTRANET.Models.convenio
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h2>Detalles</h2>
+            </div>
+
+        </div>
+           
+        <div class="row">
+            <div class="col-md-8">
+                <div>
+                    @*<h4>convenio</h4>*@
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.categoriaConvenios.categoria)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.categoriaConvenios.categoria)
+                        </dd>
+
+                        @*<dt>
+                            @Html.DisplayNameFor(model => model.usuarios.nickName)
+                        </dt>*@
+
+                        @*<dd>
+                            @Html.DisplayFor(model => model.usuarios.nickName)
+                        </dd>*@
+
+                        @*<dt>
+                            @Html.DisplayNameFor(model => model.ubicacionImagen)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ubicacionImagen)
+                        </dd>*@
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.descripcion)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.descripcion)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.fechaVigencia)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.fechaVigencia)
+                        </dd>
+
+                        @*<dt>
+                            @Html.DisplayNameFor(model => model.estado)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.estado)
+                        </dd>*@
+
+                    </dl>
+                </div>
+
+
+            </div>
+            <div class="col-md-4">
+
+                @*<img src="@Html.DisplayFor(model => model.ubicacionImagen)"  style="width:70%; height:auto;"/>*@
+                <img src="@Url.Content(Model.ubicacionImagen)" style="width:70%; height:auto;" />
+                
+            </div>
+
+
+        </div>
+
+        
+
+
+        <p>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.convenioId }) |
+            @Html.ActionLink("Regresar a la Lista", "Lista")
+        </p>
+    </div>
+</div>

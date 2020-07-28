@@ -1,0 +1,631 @@
+﻿@model IEnumerable<DINTRANET.Models.directorio>
+
+
+@{
+    ViewBag.Title = "lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<DINTRANET.Models.sitios> sitios = ViewBag.sitio;
+}
+
+
+<br /><br />
+<div class="container clearfix">
+
+    <div class="header-line">
+
+        <h1>Nuestras Sucursales</h1>
+    </div>
+
+
+</div>
+
+
+
+@* tab *@
+@*<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#suc"></a></li>
+        
+
+    </ul>
+</div>*@
+<br /><br />
+@*<div class="tab-content">*@
+    @*<div id="suc" class="tab-pane fade in active">*@
+        <div class="container">
+            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Buscar" title="Type in a name">
+            <br />
+        </div>
+        <div class="container directorioContenedor" id="myTable">
+
+            @foreach (var item in Model.Where(s => s.tipo == "empenios"))
+            {
+                @* SECCION DE UNA SUCURSAL DE EMPÈÑOS *@
+                <div class="row directorioSeccion" id="@item.sucursal.ToUpper().Replace(" ","_")">
+                    <div class="col-md-4">
+                        @* seccion del mapa y el título *@
+                        @*<img class="imgDirectorio" src="~/assets/moneda.jpg" style="width:30%; height:auto; font-weight:bold;">*@
+
+                        <center><h4 class="directorioSuc">@item.sucursal.ToUpper()</h4></center>
+                        @*<iframe class="mapDirectorio" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.5448634190262!2d-89.6306329921141!3d20.94530734397074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56722be651a1e1%3A0xe5d460f15c54bf10!2sDinero%20Inmediato!5e0!3m2!1ses!2smx!4v1585011411854!5m2!1ses!2smx" frameborder="0" style="border:0; " allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>*@
+                        @Html.Raw(item.ubicacion)
+
+
+                    </div>
+
+                    <div class="col-md-8">
+                        @* seccion de la infomacion *@
+                        <div class="row">
+                            <div class="col-md-6">
+                                <br />
+                                <br />
+                                <p><span style="font-weight:bold;">Horario:</span> @String.Format("{0:00}", item.horario_apertura.Hours):@String.Format("{0:00}", item.horario_apertura.Minutes) - @String.Format("{0:00}", item.horario_cierrre.Hours):@String.Format("{0:00}", item.horario_cierrre.Minutes)  </p>
+                                @*<p><span style="font-weight:bold;">Gerente de zona:</span> @item.gerente_zona.ToUpper()</p>*@
+                                <p><span style="font-weight:bold;">Gerente de zona:</span> Nombre del Gerente</p>
+                                <p><span style="font-weight:bold;">Cel. Gerente:</span> @item.cel_gerente</p>
+                                @*<p></p>*@
+                                <p>
+
+
+                                    <span style="font-weight:bold;">Email Gerente:</span>
+                                    @if (item.email_gerente != "")
+                                    {
+
+                                        @item.email_gerente
+
+
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                                <p>
+                                    <span style="font-weight:bold;">Direccion Sucursal:</span>
+                                    @if (item.direccion != "")
+                                    {
+                                        @item.direccion
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <br />
+                                <br />
+
+                                <p>
+                                    <span style="font-weight:bold;">Encargado:</span>
+                                    @if (item.encargado1 != "")
+                                    {
+                                        @item.encargado1.ToUpper()
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+
+
+                                <p>
+                                    <span style="font-weight:bold;">Tel: Sucursal</span>
+                                    @if (item.telefono_suc != "")
+                                    {
+                                        @item.telefono_suc
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+
+                                </p>
+
+                                <p>
+                                    <span style="font-weight:bold;">Correo Sucursal:</span>
+                                    @if (item.email_Sucursal != "")
+                                    {
+                                        @item.email_Sucursal
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                               
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            }
+
+
+            @foreach (var item in Model.Where(s => s.tipo == "ventas"))
+            {
+                @* SECCION DE UNA SUCURSAL DE VENTAS *@
+                <div class="row directorioSeccion" id="@item.sucursal.ToUpper().Replace(" ","_")">
+                    <div class="col-md-4">
+                        @* seccion del mapa y el título *@
+                        @*<img class="imgDirectorio" src="~/assets/moneda.jpg" style="width:30%; height:auto; font-weight:bold;">*@
+
+                        <center><h4 class="directorioSuc">@item.sucursal.ToUpper()</h4></center>
+                        @*<iframe class="mapDirectorio" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d931.5448634190262!2d-89.6306329921141!3d20.94530734397074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f56722be651a1e1%3A0xe5d460f15c54bf10!2sDinero%20Inmediato!5e0!3m2!1ses!2smx!4v1585011411854!5m2!1ses!2smx" frameborder="0" style="border:0; " allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>*@
+                        @Html.Raw(item.ubicacion)
+
+
+                    </div>
+
+                    <div class="col-md-8">
+                        @* seccion de la infomacion *@
+                        <div class="row">
+                            <div class="col-md-6">
+                                <br />
+                                <br />
+                                <p><span style="font-weight:bold;">Horario:</span> @String.Format("{0:00}", item.horario_apertura.Hours):@String.Format("{0:00}", item.horario_apertura.Minutes) - @String.Format("{0:00}", item.horario_cierrre.Hours):@String.Format("{0:00}", item.horario_cierrre.Minutes)  </p>
+                                <p><span style="font-weight:bold;">Encargado de Empeños:</span> @item.gerente_zona.ToUpper()</p>
+                                <p>@*<span style="font-weight:bold;">cel:</span> @item.cel_gerente*@</p>
+                                @*<p></p>*@
+                                <p>
+
+
+                                    <span style="font-weight:bold;">Correo Empeños:</span>
+                                    @if (item.email_gerente != "")
+                                    {
+
+                                        @item.email_gerente
+
+
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                                <p>
+                                    <span style="font-weight:bold;">Telefono Empeños:</span>
+                                    @if (item.cel_gerente != "")
+                                    {
+                                        @item.cel_gerente
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <br />
+                                <br />
+
+                                <p>
+                                    <span style="font-weight:bold;">Encargado Ventas:</span>
+                                    @if (item.encargado1 != "")
+                                    {
+                                        @item.encargado1.ToUpper()
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                                <p>
+                                    <span style="font-weight:bold;">Correo Ventas:</span>
+                                    @if (item.email_encargado1 != "")
+                                    {
+                                        @item.email_encargado1
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                                <p>
+                                    <span style="font-weight:bold;">Telefono Ventas:</span>
+                                    @if (item.cel_encargado1 != "")
+                                    {
+                                        @item.cel_encargado1
+                                    }
+                                    else
+                                    {
+                                        <span>NA</span>
+                                    }
+                                </p>
+
+                              
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            }
+        </div>
+    @*</div>*@
+
+
+
+@*</div>*@
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+
+    function myFunction() {
+        input = document.getElementById("myInput");
+        valor = input.value.toUpperCase();
+        //var valor = $(this).val();
+        //var div = document.getElementsByClassName("#main");
+        //var divs = document.getElementsByClassName("directorioContenedor");
+        var divs = document.getElementsByClassName("directorioSeccion");
+        //var ps = document.getElementsByTagName("p");
+
+
+        for (i = 0; i < divs.length; i++) {
+            //div = divs[i].getElementsByClassName("categoriaDIV")[0];
+            //sucursal
+            if (divs[i].id.indexOf(valor.replace(" ", "_")) > -1) {
+                divs[i].style.display = "";
+            } else {
+                //divs[i].style.display = "none";
+                //gerente de sucrusal
+                var ps = divs[i].getElementsByTagName("p")[1];
+                if (ps) {
+                    txtValue = ps.textContent || ps.innerText;
+                    if (txtValue.toUpperCase().indexOf(valor) > -1) {
+                        divs[i].style.display = "";
+                    }
+                    else {
+                        //divs[i].style.display = "none";
+                        //1er encargado
+                        var p2 = divs[i].getElementsByTagName("p")[5];
+
+                        if (p2) {
+                            txtValue = p2.innerText;
+                            if (txtValue.toUpperCase().indexOf(valor) > -1) {
+                                divs[i].style.display = "";
+                            }
+                            else {
+                                //divs[i].style.display = "none";
+                                //2do encargado
+                                var p3 = divs[i].getElementsByTagName("p")[7];
+                                if (p3) {
+                                    txtValue = p3.innerText;
+                                    if (txtValue.toUpperCase().indexOf(valor) > -1) {
+                                        divs[i].style.display = "";
+                                    }
+                                    else {
+                                        divs[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
+        }
+
+
+    }
+
+    //});
+
+
+
+
+</script>
+
+
+
+
+
+@foreach (var item in Model.Where(s => s.tipo == "Staff"))
+{
+
+    if (item.encargado1 != "")
+    {
+
+        <div class="modal fade" id="@item.cve_Sucursal" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        Aliados de @item.sucursal
+
+                    </div>
+                    <br />
+
+
+                    <div class="modal-body">
+
+                        <div id="mas">
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    @if (item.encargado1 != "")
+                                    {
+                                        <p>
+                                            <span style="font-weight:bold;">Aliado:</span>
+                                            @if (item.encargado1 != "")
+                                            {
+                                                @item.encargado1.ToUpper()
+
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+
+                                        <p>
+                                            <span style="font-weight:bold;">Celular:</span>
+                                            @if (item.cel_encargado1 != "")
+                                            {
+                                                @item.cel_encargado1
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Correo:</span>
+                                            @if (item.email_encargado1 != "")
+                                            {
+                                                @item.email_encargado1
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+                                    }
+
+
+                                    @if (item.encargado2 != "")
+                                    {
+                                        <p>
+                                            <span style="font-weight:bold;">Aliado:</span>
+                                            @if (item.encargado2 != "")
+                                            {
+                                                @item.encargado2.ToUpper()
+
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+
+                                        <p>
+                                            <span style="font-weight:bold;">Celular:</span>
+                                            @if (item.cel_encargado2 != "")
+                                            {
+                                                @item.cel_encargado2
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Correo:</span>
+                                            @if (item.email_encargado2 != "")
+                                            {
+                                                @item.email_encargado2
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+                                    }
+
+                                    @if (item.encargado3 != "")
+                                    {
+                                        <p>
+                                            <span style="font-weight:bold;">Aliado:</span>
+                                            @if (item.encargado3 != "")
+                                            {
+                                                @item.encargado3.ToUpper()
+
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+
+                                        <p>
+                                            <span style="font-weight:bold;">Celular:</span>
+                                            @if (item.cel_encargado3 != "")
+                                            {
+                                                @item.cel_encargado3
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Correo:</span>
+                                            @if (item.email_encargado3 != "")
+                                            {
+                                                @item.email_encargado3
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+                                    }
+
+
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    @if (item.encargado4 != "")
+                                    {
+                                        <p>
+                                            <span style="font-weight:bold;">Aliado:</span>
+                                            @if (item.encargado4 != "")
+                                            {
+                                                @item.encargado4.ToUpper()
+
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Celular:</span>
+                                            @if (item.cel_encargado4 != "")
+                                            {
+                                                @item.cel_encargado4
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Correo:</span>
+                                            @if (item.email_encargado4 != "")
+                                            {
+                                                @item.email_encargado4
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+                                    }
+
+
+                                    @if (item.encargado5 != "")
+                                    {
+                                        <p>
+                                            <span style="font-weight:bold;">Aliado:</span>
+                                            @if (item.encargado5 != "")
+                                            {
+                                                @item.encargado5.ToUpper()
+
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Celular:</span>
+                                            @if (item.cel_encargado5 != "")
+                                            {
+                                                @item.cel_encargado5
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+
+                                        </p>
+
+                                        <p>
+                                            <span style="font-weight:bold;">Correo:</span>
+                                            @if (item.email_encargado5 != "")
+                                            {
+                                                @item.email_encargado5
+                                            }
+                                            else
+                                            {
+                                                <span>NA</span>
+                                            }
+                                        </p>
+
+
+                                    }
+
+
+                                </div>
+
+
+                            </div>                         
+
+
+                            
+
+                        </div>
+
+
+                    </div>
+
+                    <br />
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+
+}

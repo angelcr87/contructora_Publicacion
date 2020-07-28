@@ -1,0 +1,81 @@
+﻿@model DINTRANET.Models.sitios
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+   
+
+    <h2>Estas segura de eliminar este registro?</h2>
+    
+
+    <div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.nombreSitio)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nombreSitio)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.nombreContacto)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nombreContacto)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.telefonoContacto)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.telefonoContacto)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.direccionContacto)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.direccionContacto)
+                        </dd>
+
+                    </dl>
+
+                </div>
+
+                <div class="col-md-6">
+
+
+                    <img src="@Url.Content(Model.imagenLogoSitio)" style="width: 60%; height:auto;" />
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+             
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Regresar a la Lista", "Index")
+            </div>
+        }
+    </div>
+
+</div>

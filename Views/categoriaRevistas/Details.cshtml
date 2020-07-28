@@ -1,0 +1,28 @@
+﻿@model DINTRANET.Models.categoriaRevista
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contenedor_forms">
+    <h2>Detalles</h2>
+
+    <div>
+        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.categoria)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.categoria)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.categoriaId }) |
+        @Html.ActionLink("Regresar a la lista", "Index")
+    </p>
+</div>

@@ -1,0 +1,285 @@
+﻿@model IEnumerable<DINTRANET.Models.directorio>
+
+@{
+    ViewBag.Title = "lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div id="servicios" class="Servicios_slider" style="padding-top: 5%;">
+
+    <div class="container">
+
+
+        <div class="center-block less-width text-center clearfix">
+            <h1>Directorio de <span class="text-greensea">Sucursales y Staff</span></h1>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#suc">Sucursales</a></li>
+            <li><a data-toggle="tab" href="#staff">Staff</a></li>
+
+        </ul>
+        <br /><br />
+        <div class="tab-content">
+            <div id="suc" class="tab-pane fade in active">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Buscar" title="Type in a name">
+                <br />
+                <ul class="responsive-table" id="myTable">
+
+                    <li class="table-header" style="color:white;">
+
+                        <div class="col col-1"><center>Sucursal</center></div>
+                        <div class="col col-1"><center>Direccion</center></div>
+                        <div class="col col-1"><center>Horario</center></div>
+                        <div class="col col-3"><center>Gerente de Sucursal</center></div>
+                        @*<div class="col col-1">Celular</div>*@
+                        <div class="col col-3"><center>Encargados</center></div>
+                        <div class="col col-1"><center>Telefono Suc.</center></div>
+
+                    </li>
+
+
+                    @foreach (var item in Model.Where( s => s.tipo == "Sucursal"))
+                    {
+                        <li class="table-row">
+                            <div class="col col-1" data-label="Sucursal"><center> <span style="font-weight:bold; font-size:large;" >@item.sucursal</span> </center></div>
+                            <div class="col col-1" data-label="Direccion"><center> @item.direccion</center></div>
+                            @*<div class="col col-1" data-label="Horario"><center> @String.Format("{0:t}", @item.horario_apertura) - @String.Format("{0:t}", @item.horario_cierrre)</center> </div>*@
+                            <div class="col col-1" data-label="Horario"><center> @String.Format("{0:00}", item.horario_apertura.Hours):@String.Format("{0:00}", item.horario_apertura.Minutes) - @String.Format("{0:00}", item.horario_cierrre.Hours):@String.Format("{0:00}", item.horario_cierrre.Minutes)  </center> </div>
+                            <div class="col col-3" data-label="Gerente Zona"><center> @item.gerente_zona <br /> Cel: @item.cel_gerente </center></div>
+                            @*<div class="col col-1" data-label="Celular"> </div>*@
+                            <div class="col col-3" data-label="Encargados">
+                                <center>
+                                    @item.encargado1 <br />
+
+                                    @if (@item.cel_encargado1 !="")
+                                    {
+
+                                    <span>Cel:</span> @item.cel_encargado1
+
+                                    }
+                                    
+                                     
+
+                                    @if (@item.encargado2 != "")
+                                    {
+                                        <br /><br />
+                                        @item.encargado2
+                                        <br />
+
+                                        if (@item.cel_encargado2 != "")
+                                        {
+                                            <span>Cel: </span>
+                                            @item.cel_encargado2
+                                        }
+
+
+
+                                    }
+
+                                </center>
+                            </div>
+                            <div class="col col-1" data-label="Telefono Suc.">
+                            <center> 
+                               
+                                @item.telefono_suc
+                                <br />
+                                @if (@item.ext_suc != "")
+                                {
+                                   
+                                <span>Ext:</span> @item.ext_suc
+
+                                }                              
+                                
+                               
+                                </center></div>
+
+                        </li>
+
+                    }
+
+
+
+
+
+
+                </ul>
+
+            </div>
+
+
+            <div id="staff" class="tab-pane fade">
+
+                <input type="text" class="form-control" id="myInput2" onkeyup="myFunction2()" placeholder="Buscar" title="Type in a name">
+                <br />
+                <ul class="responsive-table" id="myTable2">
+
+                    <li class="table-header" style="color:white;">
+
+                        <div class="col col-1"><center>Departamento</center></div>
+                        <div class="col col-1"><center>Horario</center></div>
+                        <div class="col col-3"><center>Jefe de Área</center></div>
+                        @*<div class="col col-1">Celular</div>*@
+                        <div class="col col-3"><center>Encargados</center></div>
+                        <div class="col col-1"><center>Telefono</center></div>
+
+                    </li>
+
+
+                    @foreach (var item in Model.Where(s => s.tipo =="Staff"))
+                    {
+                        <li class="table-row">
+                            <div class="col col-1" data-label="Departamento"><center><span style="font-weight:bold; font-size:large;"> @item.sucursal </span></center></div>
+                            @*<div class="col col-1" data-label="Horario"><center> @String.Format("{0:t}", @item.horario_apertura) - @String.Format("{0:t}", @item.horario_cierrre)</center> </div>*@
+                            <div class="col col-1" data-label="Horario"><center> @String.Format("{0:00}", item.horario_apertura.Hours):@String.Format("{0:00}", item.horario_apertura.Minutes) - @String.Format("{0:00}", item.horario_cierrre.Hours):@String.Format("{0:00}", item.horario_cierrre.Minutes)  </center> </div>
+                            <div class="col col-3" data-label="Gerente"><center> @item.gerente_zona <br /> Cel: @item.cel_gerente </center></div>
+                            @*<div class="col col-1" data-label="Celular"> </div>*@
+                            <div class="col col-3" data-label="Encargados">
+                                <center>
+                                    @item.encargado1 <br /> 
+                                    
+
+                                    @if (item.cel_encargado1 != "")
+	                                {
+		                                 <span>Cel: </span>@item.cel_encargado1
+                                    }
+                                    
+                                    
+
+                                    @if (item.encargado2 != "")
+                                    {
+                                        <br /><br />
+                                            @item.encargado2
+                                            <br />
+                                           
+                                        if (item.cel_encargado2 != "")
+                                        {
+                                            <span>Cel: </span>@item.cel_encargado2
+                                        }
+                                    }
+
+                                </center>
+                            </div>
+                            <div class="col col-1" data-label="Telefono">
+                            <center>
+                                     @item.telefono_suc 
+                                <br />
+
+                                @if (item.ext_suc != "")
+                                {
+                                    <span>Ext: </span>@item.ext_suc
+
+                                }
+
+                               
+                            </center></div>
+
+                        </li>
+
+                    }
+
+
+                </ul>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+
+        function myFunction() {
+            var input, filter, ul, li, div, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myTable");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                div = li[i].getElementsByTagName("div")[0];
+                if (div) {
+                    txtValue = div.textContent || div.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                        
+                    } else {
+                        //li[i].style.display = "none";
+
+                        div = li[i].getElementsByTagName("div")[3];
+                        if (div) {
+                            txtValue = div.textContent || div.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                li[i].style.display = "";
+                            } else {
+                                // li[i].style.display = "none";
+
+                                div = li[i].getElementsByTagName("div")[4];
+                                if (div) {
+                                    txtValue = div.textContent || div.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        li[i].style.display = "";
+                                    } else {
+                                        li[i].style.display = "none";
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        function myFunction2() {
+            var input, filter, ul, li, div, i, txtValue;
+            input = document.getElementById("myInput2");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myTable2");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                div = li[i].getElementsByTagName("div")[0];
+                if (div) {
+                    txtValue = div.textContent || div.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+
+                        //li[i].style.display = "none";
+                        div2 = li[i].getElementsByTagName("div")[2];
+                        if (div2) {
+                            txtValue = div2.textContent || div2.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                li[i].style.display = "";
+                            } else {
+                                //li[i].style.display = "none";
+
+                                div2 = li[i].getElementsByTagName("div")[3];
+                                if (div2) {
+                                    txtValue = div2.textContent || div2.innerText;
+                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                        li[i].style.display = "";
+                                    } else {
+                                        li[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+                
+            }
+        }
+</script>
+

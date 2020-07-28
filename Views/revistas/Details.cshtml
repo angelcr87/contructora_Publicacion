@@ -1,0 +1,61 @@
+﻿@model DINTRANET.Models.revista
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor_forms">
+    <div class="container">
+       
+        <div class="row">
+            <h2>Detalles</h2>
+            <hr />
+            <div class="col-md-6">
+                
+                
+                <dl class="dl-horizontal">
+                    <dt style="padding-bottom:30px;">
+                        @Html.DisplayNameFor(model => model.categoriaRevista.categoria)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.categoriaRevista.categoria)
+                    </dd>
+
+                    <dt style="padding-bottom:30px;">
+                        @Html.DisplayNameFor(model => model.nombreRevista)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.nombreRevista)
+                    </dd>
+
+                    <dt style="padding-bottom:30px;">
+                        @Html.DisplayNameFor(model => model.descripcionRevista)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.descripcionRevista)
+                    </dd>
+
+                </dl>
+
+            </div>
+            <div class="col-md-4">
+
+                <img src="@Url.Content(Model.ubicacionPortadaRevista)" style="width:100%; height:auto;" />
+
+            </div>
+
+        </div>
+    </div>
+    
+    
+
+    <p>
+        @*@Html.ActionLink("Editar", "Edit", new { id = Model.revistaId }) |*@
+        @Html.ActionLink("Regresar a la Lista", "Lista")
+    </p>
+
+</div>

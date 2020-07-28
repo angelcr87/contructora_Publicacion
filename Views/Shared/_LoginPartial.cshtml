@@ -1,0 +1,34 @@
+﻿@*@model IEnumerable <DINTRANET.Models.usuarios>*@
+
+@*@if (Request.IsAuthenticated)*@
+  @if(Session["usuario"] != null)
+  {
+      //using (Html.BeginForm("cerrarSession", "sesiones", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+      //{
+    @*@Html.AntiForgeryToken()*@
+      var usr = (DINTRANET.Models.usuarios)Session["usuario"];
+    
+    
+            <li>
+                @*@Html.ActionLink("Hola " + usr.nickName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+               
+                <a href="#">Hola @usr.nickName</a>
+                <ul>
+                    <li>@Html.ActionLink("Cerrar Sesion", "cerrarSession", "sesiones")</li>
+                    <li>@Html.ActionLink("Mi Perfil", "miPerfil", "usuarios")</li>
+                </ul>
+            </li>
+
+            @*<a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>*@
+           
+
+       
+  }
+
+  else
+  {
+    
+            @*<li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+            <li>@Html.ActionLink("Iniciar sesión", "iniciarSesion", "sesiones")</li>
+       
+  }

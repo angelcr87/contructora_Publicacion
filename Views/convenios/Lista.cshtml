@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DINTRANET.Models.convenio>
+
+@{
+    ViewBag.Title = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contenedor_forms">
+    <h2>Administrador de Convenios</h2>
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","convenios")'">Crear Nuevo</button>
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Index","categoriaConvenios")'"> Administrar Categorias</button>
+
+    </p>
+    <div class="table-responsive">
+        <table id="listaConvenios" class="display" style="width:100%;">
+            <thead class="tableHead">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoriaConvenios.categoria)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.usuarios.nickName)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.ubicacionImagen)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fechaVigencia)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.estado)
+                        </th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.categoriaConvenios.categoria)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.usuarios.nickName)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ubicacionImagen)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td>
+                            @String.Format("{0:dd/MM/yyyy}", item.fechaVigencia)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.estado)
+                            </td>*@
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.convenioId }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.convenioId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.convenioId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="tableFoot">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoriaConvenios.categoria)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.usuarios.nickName)
+                        </th>*@
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.ubicacionImagen)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fechaVigencia)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.estado)
+                        </th>*@
+                    <th></th>
+
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+    </div>

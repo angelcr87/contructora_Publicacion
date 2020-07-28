@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DINTRANET.Models.categoriaRevista>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="contenedor_forms">
+    <h2>Administrador de Categoria de Revistas</h2>
+
+    <p>
+        
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Create","categoriaRevistas")'">Crear Nuevo</button>
+        <button class="btn btn-default" onclick="location.href='@Url.Action("Lista","revistas")'">Regresar a Revistas</button>
+    </p>
+    <div class="table-responsive">
+        <table id="categoriaRevistas" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.categoria)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.categoria)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.categoriaId }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.categoriaId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.categoria)
+                    </td>
+                    <td></td>
+                </tr>
+
+            </tfoot>
+
+        </table>
+    </div>
+
+    </div>
